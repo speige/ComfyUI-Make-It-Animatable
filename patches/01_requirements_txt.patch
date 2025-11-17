@@ -1,0 +1,22 @@
+diff --git a/requirements.txt b/requirements.txt
+index a849eb2..f53ca33 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,13 +1,13 @@
+ # conda create -n mia python=3.11
+ # conda activate mia
+ 
+---extra-index-url https://download.pytorch.org/whl/cu121
+-torch==2.1.2
+-torchvision==0.16.2
++--extra-index-url https://download.pytorch.org/whl/cu128
++torch==2.7.0
++torchvision
+ 
+ einops
+ timm
+--f https://data.pyg.org/whl/torch-2.1.2+cu121.html
++-f https://data.pyg.org/whl/torch-2.7.0+cu128.html
+ torch-cluster
+ PyMCubes
+ 

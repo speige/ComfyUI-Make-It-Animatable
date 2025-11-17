@@ -1,0 +1,21 @@
+diff --git a/app.py b/app.py
+index 3db1c1b..f72cde4 100644
+--- a/app.py
++++ b/app.py
+@@ -1088,7 +1088,7 @@ def vis_blender(
+ 
+     print(f"Output animatable model: '{db.anim_path}'")
+ 
+-    if db.is_mesh and db.anim_path.endswith(".fbx") and os.path.isfile(db.anim_path):
++    if False and db.is_mesh and db.anim_path.endswith(".fbx") and os.path.isfile(db.anim_path):
+         with tempfile.TemporaryDirectory() as tmpdir:
+             # https://github.com/facebookincubator/FBX2glTF
+             fbx2glb_path = "util/FBX2glTF"
+@@ -1098,7 +1098,6 @@ def vis_blender(
+             os.system(fbx2glb_cmd)
+             print(f"Output visualization: '{db.anim_vis_path}'")
+     else:
+-        db.rest_vis_path = None
+         db.anim_vis_path = None
+ 
+     anim_path = db.anim_path
