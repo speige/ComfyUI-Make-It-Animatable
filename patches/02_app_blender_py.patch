@@ -1,0 +1,24 @@
+diff --git a/app_blender.py b/app_blender.py
+index c8bd8b4..acc5b8e 100644
+--- a/app_blender.py
++++ b/app_blender.py
+@@ -86,7 +86,8 @@ def main(args: argparse.Namespace):
+             armature_obj.matrix_world.identity()
+         blender_utils.update()
+ 
+-        with tempfile.NamedTemporaryFile(suffix=".glb") as f:
++        with tempfile.TemporaryDirectory() as tmp:
++            f = type('',(object,),{"name": os.path.join(tmp, 'temp.glb')})()
+             if not args.keep_raw:
+                 verts = mesh.vertices
+                 verts[:, 1], verts[:, 2] = verts[:, 2].copy(), -verts[:, 1].copy()
+@@ -172,7 +173,8 @@ def main(args: argparse.Namespace):
+ 
+             if gs is not None:
+                 mesh_obj.hide_set(True)
+-                with tempfile.NamedTemporaryFile(suffix=".ply") as f:
++                with tempfile.TemporaryDirectory() as tmp:
++                    f = type('',(object,),{"name": os.path.join(tmp, 'temp.ply')})()
+                     gs = torch.from_numpy(gs)
+                     gs = transform_gs(gs, transform=(Scale(1 / scaling)))
+                     save_gs(gs, f.name)
