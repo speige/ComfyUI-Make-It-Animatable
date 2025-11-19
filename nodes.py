@@ -157,7 +157,7 @@ def run_make_it_animatable(input_path: str, **node_kwargs):
     ]
     result = subprocess.run(cmd, capture_output=True, text=True)
 
-    if not Path(output_file).exists():
+    if not output_file.exists():
         print("Make-It-Animatable subprocess failed:")
         print(result.stdout)
         print(result.stderr)
@@ -203,7 +203,8 @@ class MakeItAnimatableRig:
         if not os.path.isfile(input_path):
             raise RuntimeError(f"Input model not found: {input_path}")
 
-        return run_make_it_animatable(input_path, is_gs=False, no_fingers=no_fingers, input_normal=use_normals, bw_fix=weight_postprocess)
+        result = run_make_it_animatable(input_path, is_gs=False, no_fingers=no_fingers, input_normal=use_normals, bw_fix=weight_postprocess)
+        return (result,)
     
 class MakeItAnimatableRigGS:
     @classmethod
@@ -245,7 +246,8 @@ class MakeItAnimatableRigGS:
         if not os.path.isfile(input_path):
             raise RuntimeError(f"Input model not found: {input_path}")
 
-        return run_make_it_animatable(input_path, is_gs=True, opacity_threshold=opacity_threshold, no_fingers=no_fingers, input_normal=use_normals, bw_fix=weight_postprocess)
+        result = run_make_it_animatable(input_path, is_gs=True, opacity_threshold=opacity_threshold, no_fingers=no_fingers, input_normal=use_normals, bw_fix=weight_postprocess)
+        return (result,)
 
 NODE_CLASS_MAPPINGS = {
     "MakeItAnimatableRig": MakeItAnimatableRig,
