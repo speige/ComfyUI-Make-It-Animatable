@@ -44,6 +44,22 @@ Then start ComfyUI. First node execution may take several minutes to do one-time
 
 ## 🛠 Troubleshooting
 
+### pip install errors
+
+#### Enable long file paths in windows & restart PC
+```powershell
+Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1 -Type DWord; Write-Host "LongPathsEnabled set to 1. Reboot required."
+```
+
+#### Incorrect cuda version
+The wrapped repo installs its own venv outside ComfyUI which needs to match your installed cuda toolkit version
+```
+nvcc --version
+Modify \Make_It_Animatable\requirements.txt to match your environment
+create a git patch file
+save it to \ComfyUI_Make-It-Animatable\patches\01_requirements_txt.patch
+```
+
 ### Blender errors
 
 If Blender cannot import/export FBX/GLB, ensure your ComfyUI environment has Blender available in PATH.
